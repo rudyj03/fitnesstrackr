@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 import 'package:fitnesstrackr/model/name.dart';
+import 'package:fitnesstrackr/model/workout.dart';
 import 'package:http/http.dart' as http;
 import '../model/form.dart';
 
@@ -9,6 +10,7 @@ class FormController {
   // Callback function to give response of status of current request.
   final void Function(String) callback;
   final void Function(List<Name>) getNamesCallback;
+  final void Function(List<Workout>) getWorkoutsCallback;
 
   // Google App Script Web URL.
   static const String URL = "https://script.google.com/macros/s/AKfycbypIrYS8IVKtRvp68_IBI_a0WRsOwXpIYob16H2SoexGvltRcw/exec";
@@ -17,7 +19,7 @@ class FormController {
   static const STATUS_SUCCESS = "SUCCESS";
 
   // Default Contructor
-  FormController(this.callback, this.getNamesCallback);
+  FormController(this.callback, this.getNamesCallback, this.getWorkoutsCallback);
 
   void getNames() async {
     try {

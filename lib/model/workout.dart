@@ -1,7 +1,7 @@
 class Workout {
-  String workout;
-  String units;
-  String index;
+  String workout = "";
+  String units = "";
+  String index = "";
 
   Workout();
 

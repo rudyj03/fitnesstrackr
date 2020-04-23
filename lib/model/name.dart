@@ -1,6 +1,6 @@
 class Name {
-  String name;
-  int index;
+  String name = "";
+  int index = 0;
 
   Name();
 

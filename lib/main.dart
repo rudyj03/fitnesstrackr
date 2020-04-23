@@ -4,6 +4,7 @@ import 'package:fitnesstrackr/model/workout.dart';
 import 'package:fitnesstrackr/model/name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'styles.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,11 +34,15 @@ class _TrackrState extends State<Trackr> {
   final _form = new WorkoutForm();
   List<Workout> _workouts = new List<Workout>();
   List<Name> _names = new List<Name>();
+  Name selectedName = new Name();
+  Workout selectedWorkout = new Workout();
+  Widget _initChild = Text("Getting data...");
 
   @override
   void initState() {
-    FormController formController = FormController(_submitCallback, _getNamesCallback);
+    FormController formController = FormController(_submitCallback, _getNamesCallback, _getWorkoutsCallback);
     formController.getNames();
+    formController.getWorkouts();
     super.initState();
   }
 
@@ -55,51 +60,119 @@ class _TrackrState extends State<Trackr> {
           backgroundColor: Colors.blueGrey,
         ),
         child: SafeArea(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(height:75, child: 
-                  CupertinoPicker(
-                    magnification: 1.5,
-                    backgroundColor: Colors.grey[100],
-                    children: List<Widget>.generate(
-                      _names.length,
-                      (int i) {
-                          return Text(_names[i].name);
-                      }),
-                    itemExtent: 50, //height of each item
-                    looping: true,
-                    onSelectedItemChanged: (int index) {  
-                      //selectitem = index;
-                    },
-                  )
-                ),
-                Divider(height: 25.0,),
-                CupertinoTextField(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 16.0),
-                  placeholder: 'Enter some text',
-                  onChanged: (val) => setState(() => _form.duration = val as double),
-                ),
-                Divider(height: 25.0,),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 16.0),
-                  child: CupertinoButton(
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        _showDialog();
-                      }
-                    },
-                    child: Text('Submit'),
-                  ),
-                ),
-              ],
-            ),
-          )
+          child: formWidget()
         )
+    );
+  }
+
+  Widget formWidget() {
+    return Column(
+      key: _formKey,
+      children: <Widget>[
+        namePickerRow(),
+        namePicker(),
+        workoutPickerRow(),
+        workoutPicker()
+      ],
+    );
+  }
+
+
+  Widget namePickerRow() {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Icon(
+                CupertinoIcons.clock,
+                color: CupertinoColors.lightBackgroundGray,
+                size: 28,
+              ),
+              SizedBox(width: 6),
+              Text(
+                'Name',
+                style: Styles.deliveryTimeLabel,
+              ),
+              SizedBox(width: 25),
+              Text(
+                selectedName.name,
+                style: Styles.deliveryTime,
+              ),
+            ],
+          ),
+        ]
+      );
+  }
+
+  Widget namePicker() {
+    return Container(
+      height: 75,
+      child: CupertinoPicker(
+        magnification: 1.5,
+        backgroundColor: Colors.grey[100],
+        scrollController: FixedExtentScrollController(initialItem: 0),
+        children: List<Widget>.generate(
+          _names.length,
+          (int i) => Text(_names[i].name)
+        ),
+        itemExtent: 50, //height of each item
+        looping: true,
+        onSelectedItemChanged: (int i) {
+          print("Changed to " + _names[i].name);
+          setState(() {selectedName = _names[i];});
+        },
+      )
+    );
+  }
+
+  Widget workoutPickerRow() {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Icon(
+                CupertinoIcons.heart,
+                color: CupertinoColors.lightBackgroundGray,
+                size: 28,
+              ),
+              SizedBox(width: 6),
+              Text(
+                'Workout',
+                style: Styles.deliveryTimeLabel,
+              ),
+              SizedBox(width: 25),
+              Text(
+                selectedWorkout.workout,
+                style: Styles.deliveryTime,
+              ),
+            ],
+          ),
+        ]
+      );
+  }
+
+  Widget workoutPicker() {
+    return Container(
+      height: 75,
+      child: CupertinoPicker(
+        magnification: 1.5,
+        backgroundColor: Colors.grey[100],
+        scrollController: FixedExtentScrollController(initialItem: 0),
+        children: List<Widget>.generate(
+          _names.length,
+          (int i) => Text(_workouts[i].workout)
+        ),
+        itemExtent: 50, //height of each item
+        looping: true,
+        onSelectedItemChanged: (int i) {
+          print("Changed to " + _workouts[i].workout);
+          setState(() {selectedName = _names[i];});
+        },
+      )
     );
   }
 
@@ -121,13 +194,19 @@ class _TrackrState extends State<Trackr> {
   }
 
   _getNamesCallback(List<Name> names){
-    names.forEach((name) => print(name.name));
-    setState(() => _names = names);
+    setState(() {
+      _names = names;
+      selectedName = _names[0];
+      //_initChild = formWidget();
+    });
   }
 
   _getWorkoutsCallback(List<Workout> workouts) {
-    print(workouts);
-    setState(() => _workouts = workouts);
+    workouts.forEach((workout) => print(workout.workout));
+    setState(() { 
+      _workouts = workouts;
+      selectedWorkout = _workouts[0];
+    });
   }
 
   _submitCallback(String status){

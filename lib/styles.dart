@@ -20,9 +20,8 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
   );
 
-  static const TextStyle productRowItemPrice = TextStyle(
-    color: Color(0xFF8E8E93),
-    fontSize: 13,
+  static const TextStyle inputs = TextStyle(
+    color: Color(0xFF159ead),
     fontWeight: FontWeight.w300,
   );
 

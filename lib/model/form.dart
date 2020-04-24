@@ -11,6 +11,6 @@ class WorkoutForm {
   // Method to make GET parameters.
   String toParams(){
     var cell = workout.index + name.index.toString();
-    return "?type=update&cell=$cell&duration=$duration";
+    return "?type=update&cell=$cell&value=$duration";
   }
 }

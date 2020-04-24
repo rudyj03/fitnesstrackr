@@ -7,10 +7,6 @@ import '../model/form.dart';
 /// FormController is a class which does work of saving FeedbackForm in Google Sheets using 
 /// HTTP GET request on Google App Script Web URL and parses response and sends result callback.
 class FormController {
-  // Callback function to give response of status of current request.
-  final void Function(String) callback;
-  final void Function(List<Name>) getNamesCallback;
-  final void Function(List<Workout>) getWorkoutsCallback;
 
   // Google App Script Web URL.
   static const String URL = "https://script.google.com/macros/s/AKfycbypIrYS8IVKtRvp68_IBI_a0WRsOwXpIYob16H2SoexGvltRcw/exec";
@@ -19,45 +15,32 @@ class FormController {
   static const STATUS_SUCCESS = "SUCCESS";
 
   // Default Contructor
-  FormController(this.callback, this.getNamesCallback, this.getWorkoutsCallback);
+  FormController();
 
-  void getNames() async {
-    try {
-      await http.get(
-        URL + "?type=getNames"
-      ).then((response){
-        List<Name> names = (convert.jsonDecode(response.body)['names'] as List).map((i) => Name.fromJSON(i)).toList();
-        
-        getNamesCallback(names);
-      });    
-    } catch (e) {
-      print(e);
-    }
+
+  Future<http.Response> getNames() async {
+    var response = await http.get(URL + "?type=getNames");
+    return response;
   }
 
-  void getWorkouts() async {
-    try {
-      await http.get(
-        URL + "?type=getWorkouts"
-      ).then((response){
-        callback(convert.jsonDecode(response.body)['workouts']);
-      });    
-    } catch (e) {
-      print(e);
-    }
+  List<Name> convertNamesFromJson(String json) {
+    return (convert.jsonDecode(json)['names'] as List).map((i) => Name.fromJSON(i)).toList();
+  }
+
+  Future<http.Response> getWorkouts() async {
+    var response = await http.get(URL + "?type=getWorkouts");
+    return response;    
+  }
+
+  List<Workout> convertWorkoutsFromJson(String json) {
+    return (convert.jsonDecode(json)['workouts'] as List).map((i) => Workout.fromJSON(i)).toList();
   }
 
   /// Async function which saves feedback, parses [feedbackForm] parameters
   /// and sends HTTP GET request on [URL]. On successful response, [callback] is called.
-  void submitForm(WorkoutForm feedbackForm) async {
-    try {
-      await http.get(
-        URL + feedbackForm.toParams()
-      ).then((response){
-        callback(convert.jsonDecode(response.body)['status']);
-      });    
-    } catch (e) {
-      print(e);
-    }
+  Future<http.Response> submitForm(WorkoutForm feedbackForm) async {
+    print("Submitting to " + URL+feedbackForm.toParams());
+    var submitResponse = await http.get(URL + feedbackForm.toParams());
+    return submitResponse;
   }
 }

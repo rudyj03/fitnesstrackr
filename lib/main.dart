@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fitnesstrackr/controller/form_controller.dart';
 import 'package:fitnesstrackr/model/form.dart';
 import 'package:fitnesstrackr/model/workout.dart';
@@ -15,6 +13,8 @@ import 'package:http/http.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'styles.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(MyApp());
 
@@ -130,9 +130,13 @@ class _TrackrState extends State<Trackr> {
   }
 
 
+  Future<AudioPlayer> playSound() async {
+      AudioCache cache = new AudioCache();
+      return await cache.play("submit_sound.mp3");
+    }
+
   _refresh() {
     SystemSound.play(SystemSoundType.click);
-    
     setState(() {
       _namesFuture = formController.getNames();
       _workoutsFuture = formController.getWorkouts();
@@ -143,7 +147,6 @@ class _TrackrState extends State<Trackr> {
 
   _submitForm(String message) {
     FocusScope.of(context).requestFocus(FocusNode());
-    SystemSound.play(SystemSoundType.click);
     bool isValid = _validateForm();
     if(!isValid) {
       return;
@@ -156,15 +159,17 @@ class _TrackrState extends State<Trackr> {
       .then((response) {
         print(response.body);
         if(response.statusCode == 200){
-          Fluttertoast.showToast(
-            msg: "Your workout has been logged!",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Color(0xFF159ead),
-            textColor: Colors.black,
-            fontSize: 16.0
-          );
+          playSound().then((audio){
+            Fluttertoast.showToast(
+              msg: "Your workout has been logged!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Color(0xFF159ead),
+              textColor: Colors.black,
+              fontSize: 16.0
+            );
+          });
         }
       });
     }

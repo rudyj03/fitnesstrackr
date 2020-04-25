@@ -1,16 +1,7 @@
 # fitnesstrackr
 
-A new Flutter project.
+This is a simple flutter project to help track workouts as a part of a fitness challenge my friends and I are taking part in.
 
-## Getting Started
+The app itself reads from, and writes to, a google spreadsheet we use to track how much of a particular workout a person has done.  This is accomplished throught a google apps script running as a web service.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+It's a fun little side project I did to keep busy during coronavirus.  Stay safe and healthy!

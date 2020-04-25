@@ -71,7 +71,7 @@ class _TrackrState extends State<Trackr> {
     return CupertinoPageScaffold(
         key: _scaffoldKey,
         navigationBar: CupertinoNavigationBar(
-          middle: Text("Fitness Trackr", style: Styles.title,),
+          middle: Image.asset('assets/images/ftbanner.png'),
           backgroundColor: Styles.navigationBackground,
         ),
         backgroundColor: Styles.scaffoldBackground,

@@ -28,9 +28,13 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
-  flutter_launcher_icons:
+  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path: 'assets/images/fticon.png'
+  ios: true
 
 
 # For information on the generic Dart part of this file, see the
@@ -45,6 +49,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/submit_sound.mp3
+    - assets/images/ftbanner.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

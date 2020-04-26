@@ -34,24 +34,27 @@ class LeaderBoard extends StatelessWidget {
               List<TableRow> tableRows = List<TableRow>();
                leaderBoard.forEach((leaderBoardEntry) {
                   tableRows.add(TableRow(children: [
-                      Column(children: <Widget>[
-                        Text(leaderBoardEntry.rank.toString())
-                      ]),
-                      Column(children: <Widget>[
-                        Text(leaderBoardEntry.name)
-                      ]),
-                      Column(children: <Widget>[
-                        Text(leaderBoardEntry.score.toString())
-                      ])
+                      Padding(
+                        padding: EdgeInsets.all(30.0),
+                        child: Text(leaderBoardEntry.rank.toString())
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(30.0),
+                        child: Text(leaderBoardEntry.name)
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(30.0),
+                        child: Text(leaderBoardEntry.score.toString())
+                      ),
                     ]
                   ));
                 }
               );
 
               return Container(
-                margin: EdgeInsets.all(10),
                 child: Table(
-                  border: TableBorder.all(),
+                  columnWidths: {0: FixedColumnWidth(5), 1: FixedColumnWidth(80), 2: FixedColumnWidth(15)},
+                  border: TableBorder.symmetric(outside: BorderSide.none),
                   children: tableRows,
                 )
               );

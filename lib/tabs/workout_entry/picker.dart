@@ -19,7 +19,7 @@ class Picker extends StatelessWidget {
       future: future, // a Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
         switch (snapshot.connectionState) {
-          case ConnectionState.waiting: return CupertinoActivityIndicator(animating: true,);
+          case ConnectionState.waiting: return CupertinoActivityIndicator(animating: false,);
           default:
             if (snapshot.hasError)
               return new Text('Error: ${snapshot.error}');

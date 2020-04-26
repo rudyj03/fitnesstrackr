@@ -17,6 +17,7 @@ class Trackr extends StatelessWidget {
         backgroundColor: Styles.scaffoldBackground,
         child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
+          backgroundColor: Styles.tabBackground,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home),

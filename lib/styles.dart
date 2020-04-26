@@ -39,6 +39,7 @@ abstract class Styles {
   static const Color navigationBackground = Color(0xFF93E0FF);
 
   static const Color scaffoldBackground = Color(0xFFD1E4EB);
+  static const Color tabBackground = Color(0xFFD1E4EB);
   
   static const Color submitButton = CupertinoColors.systemBlue;
 }

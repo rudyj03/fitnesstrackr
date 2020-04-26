@@ -58,50 +58,59 @@ class _WorkoutEntryTab extends State<WorkoutEntryTab> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return SafeArea(
-        child: CustomScrollView(
-          key: _formKey,
-          slivers: <Widget> [
-            CupertinoSliverRefreshControl(onRefresh: _refresh,),
-            SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-            SliverToBoxAdapter(child: NameRow(selectedName: selectedName)),
-            SliverToBoxAdapter(child: Picker(
-                future: this._namesFuture,
-                onSelectChange: (Name picked) => setState(() {selectedName = picked;}),
-                jsonConverterFuncion: formController.convertNamesFromJson,
-                fieldName: "name",
-            )),
-            SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-            SliverToBoxAdapter(child: WorkoutRow(selectedWorkout: selectedWorkout)),
-            SliverToBoxAdapter(child: Picker(
-              future: this._workoutsFuture,
-              onSelectChange: (Workout picked) => setState(() {selectedWorkout = picked;}),
-              jsonConverterFuncion: formController.convertWorkoutsFromJson,
-              fieldName: "workout",
-            )),
-            SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-            SliverToBoxAdapter(child: ValueInput(
-              selectedWorkout: selectedWorkout,
-              onChange: (val) => enteredValue = val,
-            )),
-            SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-            SliverToBoxAdapter(child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return 
+      CupertinoPageScaffold(
+        backgroundColor: Styles.scaffoldBackground,
+        child: SafeArea(
+            child: CustomScrollView(
+              key: _formKey,
+              slivers: <Widget> [
+                CupertinoSliverRefreshControl(onRefresh: _refresh,),
+                SliverToBoxAdapter(child: Column(
                   children: <Widget>[
-                  CupertinoButton(
-                      child: Icon(
-                        CupertinoIcons.check_mark_circled_solid,
-                        color: Styles.submitButton,
-                        size: 50,
+                    Text("Enter your workout", style: Styles.title,)
+                  ]
+                )),
+                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
+                SliverToBoxAdapter(child: NameRow(selectedName: selectedName)),
+                SliverToBoxAdapter(child: Picker(
+                    future: this._namesFuture,
+                    onSelectChange: (Name picked) => setState(() {selectedName = picked;}),
+                    jsonConverterFuncion: formController.convertNamesFromJson,
+                    fieldName: "name",
+                )),
+                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
+                SliverToBoxAdapter(child: WorkoutRow(selectedWorkout: selectedWorkout)),
+                SliverToBoxAdapter(child: Picker(
+                  future: this._workoutsFuture,
+                  onSelectChange: (Workout picked) => setState(() {selectedWorkout = picked;}),
+                  jsonConverterFuncion: formController.convertWorkoutsFromJson,
+                  fieldName: "workout",
+                )),
+                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
+                SliverToBoxAdapter(child: ValueInput(
+                  selectedWorkout: selectedWorkout,
+                  onChange: (val) => enteredValue = val,
+                )),
+                SliverToBoxAdapter(child: Divider(height: 20.0,thickness: 0.0, color: Styles.scaffoldBackground)),
+                SliverToBoxAdapter(child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                      CupertinoButton(
+                          child: Icon(
+                            CupertinoIcons.check_mark_circled_solid,
+                            color: Styles.submitButton,
+                            size: 50,
+                          ),
+                          onPressed: () => _submitForm("Submitting..."),
                       ),
-                      onPressed: () => _submitForm("Submitting..."),
-                  ),
-              ]
-            )
+                  ]
+                )
+              )
+            ]
           )
-        ]
-      )
-    );
+        )
+      );
   }
 
 

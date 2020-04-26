@@ -31,18 +31,28 @@ class _LeadboardTab extends State<LeadboardTab> {
 
   @override
   Widget build(BuildContext context){
-    return SafeArea(
-        child: CustomScrollView(
-          slivers: <Widget> [
-              CupertinoSliverRefreshControl(onRefresh: _refresh,),
-              SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-              SliverToBoxAdapter(child: LeaderBoard(
-                future: _leaderboardFuture, 
-                jsonConverterFuncion: formController.convertLeaderboardFromJson)
-              ),
-            ]
-          )
-      );
+    return 
+    CupertinoPageScaffold(
+      backgroundColor: Styles.scaffoldBackground,
+      child:
+        SafeArea(
+          child: CustomScrollView(
+            slivers: <Widget> [
+                CupertinoSliverRefreshControl(onRefresh: _refresh,),
+                SliverToBoxAdapter(child: Column(
+                  children: <Widget>[
+                    Text("Leaderboard", style: Styles.title)
+                  ]
+                )),
+                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
+                SliverToBoxAdapter(child: LeaderBoard(
+                  future: _leaderboardFuture, 
+                  jsonConverterFuncion: formController.convertLeaderboardFromJson)
+                ),
+              ]
+            )
+        )
+    );
   }
 
   Future<Void> _refresh() {

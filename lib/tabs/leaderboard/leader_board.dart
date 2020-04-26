@@ -2,7 +2,6 @@ import 'package:fitnesstrackr/model/leadboard_entry.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
-import '../../styles.dart';
 
 class LeaderBoard extends StatelessWidget {
   final Future future;
@@ -33,31 +32,43 @@ class LeaderBoard extends StatelessWidget {
                 return Text("There was an erroring retrieving data, please try again later");
               }
               List<TableRow> tableRows = List<TableRow>();
-               leaderBoard.forEach((leaderBoardEntry) {
+              tableRows.add(TableRow(children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal:50.0, vertical: 5.0),
+                      child: Text("Rank")
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                      child: Text("Name")
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                      child: Text("Score")
+                    ),
+                  ]
+                ));
+              leaderBoard.forEach((leaderBoardEntry) {
                   tableRows.add(TableRow(children: [
                       Padding(
-                        padding: EdgeInsets.all(30.0),
+                        padding: EdgeInsets.symmetric(horizontal:50.0, vertical: 5.0),
                         child: Text(leaderBoardEntry.rank.toString())
                       ),
                       Padding(
-                        padding: EdgeInsets.all(30.0),
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
                         child: Text(leaderBoardEntry.name)
                       ),
                       Padding(
-                        padding: EdgeInsets.all(30.0),
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
                         child: Text(leaderBoardEntry.score.toString())
                       ),
                     ]
                   ));
                 }
               );
-
-              return Container(
-                child: Table(
-                  columnWidths: {0: FixedColumnWidth(5), 1: FixedColumnWidth(80), 2: FixedColumnWidth(15)},
-                  border: TableBorder.symmetric(outside: BorderSide.none),
-                  children: tableRows,
-                )
+              return Table(
+                columnWidths: {0: FixedColumnWidth(80), 1: FixedColumnWidth(80), 2: FixedColumnWidth(10)},
+                border: TableBorder.symmetric(outside: BorderSide.none),
+                children: tableRows,
               );
             }
         }

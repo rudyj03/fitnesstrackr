@@ -65,49 +65,49 @@ class _WorkoutEntryTab extends State<WorkoutEntryTab> {
             child: CustomScrollView(
               key: _formKey,
               slivers: <Widget> [
-                CupertinoSliverRefreshControl(
-                  onRefresh: _refresh),
-                SliverToBoxAdapter(child: Column(
-                  children: <Widget>[
-                    Text("Enter your workout", style: Styles.title,)
-                  ]
-                )),
-                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-                SliverToBoxAdapter(child: NameRow(selectedName: selectedName)),
-                SliverToBoxAdapter(child: Picker(
-                    future: this._namesFuture,
-                    onSelectChange: (Name picked) => setState(() {selectedName = picked;}),
-                    jsonConverterFuncion: formController.convertNamesFromJson,
-                    fieldName: "name",
-                )),
-                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-                SliverToBoxAdapter(child: WorkoutRow(selectedWorkout: selectedWorkout)),
-                SliverToBoxAdapter(child: Picker(
-                  future: this._workoutsFuture,
-                  onSelectChange: (Workout picked) => setState(() {selectedWorkout = picked;}),
-                  jsonConverterFuncion: formController.convertWorkoutsFromJson,
-                  fieldName: "workout",
-                )),
-                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-                SliverToBoxAdapter(child: ValueRow(
-                  selectedWorkout: selectedWorkout,
-                  onChange: (val) => enteredValue = val,
-                )),
-                SliverToBoxAdapter(child: Divider(height: 20.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-                SliverToBoxAdapter(child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                      CupertinoButton(
-                          child: Icon(
-                            CupertinoIcons.check_mark_circled_solid,
-                            color: Styles.actionButton,
-                            size: 50,
-                          ),
-                          onPressed: () => _submitForm("Submitting..."),
+                CupertinoSliverRefreshControl(onRefresh: _refresh),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Text("Enter your workout", style: Styles.title, textAlign: TextAlign.center,),
+                      Divider(height: 30.0,thickness: 0.0, color: Styles.scaffoldBackground),
+                      NameRow(selectedName: selectedName),
+                      Picker(
+                          future: this._namesFuture,
+                          onSelectChange: (Name picked) => setState(() {selectedName = picked;}),
+                          jsonConverterFuncion: formController.convertNamesFromJson,
+                          fieldName: "name",
                       ),
-                  ]
+                      Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground),
+                      WorkoutRow(selectedWorkout: selectedWorkout),
+                      Picker(
+                        future: this._workoutsFuture,
+                        onSelectChange: (Workout picked) => setState(() {selectedWorkout = picked;}),
+                        jsonConverterFuncion: formController.convertWorkoutsFromJson,
+                        fieldName: "workout",
+                      ),
+                      Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground),
+                      ValueRow(
+                        selectedWorkout: selectedWorkout,
+                        onChange: (val) => enteredValue = val,
+                      ),
+                      Divider(height: 20.0,thickness: 0.0, color: Styles.scaffoldBackground),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          CupertinoButton(
+                            child: Icon(
+                              CupertinoIcons.check_mark_circled_solid,
+                              color: Styles.actionButton,
+                              size: 50,
+                            ),
+                            onPressed: () => _submitForm("Submitting..."),
+                          ),
+                        ]
+                      )
+                    ]
+                  ),
                 )
-              )
             ]
           )
         )

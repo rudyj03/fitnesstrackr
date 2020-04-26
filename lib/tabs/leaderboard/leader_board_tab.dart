@@ -39,15 +39,34 @@ class _LeadboardTab extends State<LeadboardTab> {
           child: CustomScrollView(
             slivers: <Widget> [
                 CupertinoSliverRefreshControl(onRefresh: _refresh,),
-                SliverToBoxAdapter(child: Column(
-                  children: <Widget>[
-                    Text("Leaderboard", style: Styles.title)
-                  ]
-                )),
-                SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-                SliverToBoxAdapter(child: LeaderBoard(
-                  future: _leaderboardFuture, 
-                  jsonConverterFuncion: formController.convertLeaderboardFromJson)
+                CupertinoSliverNavigationBar(
+                  backgroundColor: Styles.scaffoldBackground,
+                  largeTitle: Text("Teams", style: Styles.title, textAlign: TextAlign.center,)
+
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground),
+                    LeaderBoard(
+                      future: _leaderboardFuture, 
+                      jsonConverterFuncion: formController.convertTeamLeaderboardFromJson
+                    )
+                  ])
+                ),
+                CupertinoSliverNavigationBar(
+                  backgroundColor: Styles.scaffoldBackground,
+                  largeTitle: Text("Individuals", style: Styles.title, textAlign: TextAlign.center,),
+                  automaticallyImplyTitle: true,
+                  transitionBetweenRoutes: true,
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground),
+                    LeaderBoard(
+                      future: _leaderboardFuture, 
+                      jsonConverterFuncion: formController.convertIndividualLeaderboardFromJson
+                    )
+                  ])
                 ),
               ]
             )

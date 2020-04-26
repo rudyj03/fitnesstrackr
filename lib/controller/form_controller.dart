@@ -46,8 +46,14 @@ class FormController {
     return response;    
   }
 
-  List<LeaderboardEntry> convertLeaderboardFromJson(String json) {
-    return (convert.jsonDecode(json)['leaderboard'] as List).map((i) => LeaderboardEntry.fromJSON(i)).toList();
+  List<LeaderboardEntry> convertIndividualLeaderboardFromJson(String json) {
+    List<LeaderboardEntry> individuals = (convert.jsonDecode(json)['individuals']as List).map((i) => LeaderboardEntry.fromJSON(i)).toList();
+    return individuals;
+  }
+
+  List<LeaderboardEntry> convertTeamLeaderboardFromJson(String json) {
+    List<LeaderboardEntry> teams = (convert.jsonDecode(json)['teams']as List).map((i) => LeaderboardEntry.fromJSON(i)).toList();
+    return teams;
   }
 
   /// Async function which saves feedback, parses [feedbackForm] parameters

@@ -19,7 +19,7 @@ abstract class Styles {
     fontWeight: FontWeight.w800,
     fontFamily: "Calbri",
     fontFeatures: [FontFeature.enable('smcp')],
-    fontSize: 25
+    fontSize: 20
   );
 
   static const TextStyle fieldLabel = TextStyle(

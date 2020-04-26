@@ -11,8 +11,9 @@ class Trackr extends StatelessWidget {
   Widget build(BuildContext context){
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
           middle: Image.asset('assets/images/ftbanner.png'),
-          backgroundColor: Styles.navigationBackground,
+          backgroundColor: Styles.navigationBackground
         ),
         backgroundColor: Styles.scaffoldBackground,
         child: CupertinoTabScaffold(

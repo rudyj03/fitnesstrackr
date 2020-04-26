@@ -30,7 +30,6 @@ class WorkoutEntryTab extends StatefulWidget {
 
 class _WorkoutEntryTab extends State<WorkoutEntryTab> {
   final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   
   FormController formController = FormController();
@@ -69,6 +68,7 @@ class _WorkoutEntryTab extends State<WorkoutEntryTab> {
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
+                      Divider(height: 20.0,thickness: 0.0, color: Styles.scaffoldBackground),
                       Text("Enter your workout", style: Styles.title, textAlign: TextAlign.center,),
                       Divider(height: 30.0,thickness: 0.0, color: Styles.scaffoldBackground),
                       NameRow(selectedName: selectedName),

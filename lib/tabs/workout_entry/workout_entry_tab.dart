@@ -65,7 +65,8 @@ class _WorkoutEntryTab extends State<WorkoutEntryTab> {
             child: CustomScrollView(
               key: _formKey,
               slivers: <Widget> [
-                CupertinoSliverRefreshControl(onRefresh: _refresh,),
+                CupertinoSliverRefreshControl(
+                  onRefresh: _refresh),
                 SliverToBoxAdapter(child: Column(
                   children: <Widget>[
                     Text("Enter your workout", style: Styles.title,)

@@ -1,6 +1,7 @@
 import 'package:fitnesstrackr/model/leadboard_entry.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
+import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 import '../../styles.dart';
 
 class LeaderBoard extends StatelessWidget {
@@ -18,7 +19,7 @@ class LeaderBoard extends StatelessWidget {
       future: future, // a Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
         switch (snapshot.connectionState) {
-          case ConnectionState.waiting: return CupertinoActivityIndicator(animating: true,);
+          case ConnectionState.waiting: return NutsActivityIndicator(inactiveColor: CupertinoColors.systemGrey2);
           default:
             if (snapshot.hasError)
               return new Text('Error: ${snapshot.error}');

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../../styles.dart';
+import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class Picker extends StatelessWidget {
   final Function onSelectChange;
@@ -19,7 +21,7 @@ class Picker extends StatelessWidget {
       future: future, // a Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
         switch (snapshot.connectionState) {
-          case ConnectionState.waiting: return CupertinoActivityIndicator(animating: false,);
+          case ConnectionState.waiting: return NutsActivityIndicator(inactiveColor: CupertinoColors.systemGrey2);
           default:
             if (snapshot.hasError)
               return new Text('Error: ${snapshot.error}');

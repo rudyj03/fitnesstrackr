@@ -7,4 +7,6 @@ The app itself reads from, and writes to, a google spreadsheet we use to track h
 It's a fun little side project I did to keep busy during coronavirus.  Stay safe and healthy!
 
 
-Submit sound from Zapsplat.com
+App icon and Logo courtesty of Shalin Patel
+
+Submit sound file from Zapsplat.com

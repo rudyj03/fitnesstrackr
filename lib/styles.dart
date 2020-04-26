@@ -32,14 +32,16 @@ abstract class Styles {
   );
 
 
-  static const Color fieldDivider = Color(0xFF29BCE9);
-  static const Color pickerBackground = Color(0xFFFFFFFF);
+  static const Color fieldDivider = Color(0xFFCFECD1);
+  static const Color inputBackground = Color(0xFFFFFFFF);
   static const Color durationBackground = Color(0xFFFFFFFF);
   
   static const Color navigationBackground = Color(0xFF93E0FF);
 
   static const Color scaffoldBackground = Color(0xFFD1E4EB);
   static const Color tabBackground = Color(0xFFD1E4EB);
-  
-  static const Color submitButton = CupertinoColors.systemBlue;
+
+  static const Color actionButton = Color.fromRGBO(0, 154, 207, 1.0);
+
+  static const Color formRowIconColor = Color.fromRGBO(0, 78, 146, 1.0);
 }

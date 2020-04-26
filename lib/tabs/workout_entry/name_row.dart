@@ -21,7 +21,7 @@ class NameRow extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   CupertinoIcons.person_solid,
-                  color: CupertinoColors.systemBlue,
+                  color: Styles.formRowIconColor,
                   size: 28,
                 ),
                 SizedBox(width: 6),

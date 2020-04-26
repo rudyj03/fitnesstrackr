@@ -4,7 +4,7 @@ import 'dart:ffi';
 import 'package:fitnesstrackr/tabs/workout_entry/name_row.dart';
 import 'package:fitnesstrackr/tabs/workout_entry/picker.dart';
 import 'package:fitnesstrackr/tabs/workout_entry/validation_dialog.dart';
-import 'package:fitnesstrackr/tabs/workout_entry/value_input.dart';
+import 'package:fitnesstrackr/tabs/workout_entry/value_row.dart';
 import 'package:fitnesstrackr/tabs/workout_entry/workout_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -88,7 +88,7 @@ class _WorkoutEntryTab extends State<WorkoutEntryTab> {
                   fieldName: "workout",
                 )),
                 SliverToBoxAdapter(child: Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground)),
-                SliverToBoxAdapter(child: ValueInput(
+                SliverToBoxAdapter(child: ValueRow(
                   selectedWorkout: selectedWorkout,
                   onChange: (val) => enteredValue = val,
                 )),
@@ -99,7 +99,7 @@ class _WorkoutEntryTab extends State<WorkoutEntryTab> {
                       CupertinoButton(
                           child: Icon(
                             CupertinoIcons.check_mark_circled_solid,
-                            color: Styles.submitButton,
+                            color: Styles.actionButton,
                             size: 50,
                           ),
                           onPressed: () => _submitForm("Submitting..."),

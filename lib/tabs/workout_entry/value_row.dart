@@ -2,11 +2,11 @@ import 'package:fitnesstrackr/model/workout.dart';
 import 'package:flutter/cupertino.dart';
 import '../../styles.dart';
 
-class ValueInput extends StatelessWidget {
+class ValueRow extends StatelessWidget {
   final Workout selectedWorkout;
   final Function onChange;
 
-  const ValueInput({Key key, this.selectedWorkout, this.onChange}) : super(key: key);
+  const ValueRow({Key key, this.selectedWorkout, this.onChange}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ValueInput extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   CupertinoIcons.clock_solid,
-                  color: CupertinoColors.systemBlue,
+                  color: Styles.formRowIconColor,
                   size: 28,
                 ),
                 SizedBox(width: 6),
@@ -39,6 +39,7 @@ class ValueInput extends StatelessWidget {
             textCapitalization: TextCapitalization.words,
             style: Styles.valueInput,
             decoration: BoxDecoration(
+              color: Styles.inputBackground,
               border: Border(
                 bottom: BorderSide(
                   width: 0,

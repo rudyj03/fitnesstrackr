@@ -36,7 +36,7 @@ class Picker extends StatelessWidget {
                 height: 100,
                 child: CupertinoPicker(
                   magnification: 2.5,
-                  backgroundColor: Styles.pickerBackground,
+                  backgroundColor: Styles.inputBackground,
                   scrollController: FixedExtentScrollController(initialItem: 0),
                   children: List<Widget>.generate(
                     items.length,

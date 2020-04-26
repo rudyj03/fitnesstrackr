@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
-import '../styles.dart';
+import '../../styles.dart';
 
 class Picker extends StatelessWidget {
   final Function onSelectChange;
-  final future;
+  final Future future;
   final Function jsonConverterFuncion;
   final String fieldName;
 

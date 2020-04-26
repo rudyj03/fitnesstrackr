@@ -1,6 +1,6 @@
 import 'package:fitnesstrackr/model/name.dart';
 import 'package:flutter/cupertino.dart';
-import '../styles.dart';
+import '../../styles.dart';
 
 class NameRow extends StatelessWidget {
   final Name selectedName;

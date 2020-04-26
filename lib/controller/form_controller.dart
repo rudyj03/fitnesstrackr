@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'package:fitnesstrackr/model/leadboard_entry.dart';
 import 'package:fitnesstrackr/model/name.dart';
 import 'package:fitnesstrackr/model/workout.dart';
 import 'package:http/http.dart' as http;
@@ -38,6 +39,15 @@ class FormController {
 
   List<Workout> convertWorkoutsFromJson(String json) {
     return (convert.jsonDecode(json)['workouts'] as List).map((i) => Workout.fromJSON(i)).toList();
+  }
+
+  Future<http.Response> getLeaderboard() async {
+    var response = await http.get(URL + "?type=getLeaderboard");
+    return response;    
+  }
+
+  List<LeaderboardEntry> convertLeaderboardFromJson(String json) {
+    return (convert.jsonDecode(json)['leaderboard'] as List).map((i) => LeaderboardEntry.fromJSON(i)).toList();
   }
 
   /// Async function which saves feedback, parses [feedbackForm] parameters

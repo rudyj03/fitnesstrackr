@@ -1,6 +1,6 @@
 import 'package:fitnesstrackr/model/workout.dart';
 import 'package:flutter/cupertino.dart';
-import '../styles.dart';
+import '../../styles.dart';
 
 class ValueInput extends StatelessWidget {
   final Workout selectedWorkout;

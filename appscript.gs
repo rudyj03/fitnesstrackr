@@ -2,6 +2,7 @@
 var SHEET_ID = "1BoOWC5I_KnKarh7OdAoiFLfiR7QSp4vniY_pLWOlWmE";
 var PLAYERS = 36;
 var ACTIVITIES = 14;
+var TEAMS = 9;
 
 //Week 2
 //var SHEET_ID = "1df35IPpiPfLy3ttMn4OPInUyoqpk42meXkN8IMY5KNo";
@@ -29,9 +30,14 @@ function doGet(request){
           var cell = request.parameter.cell;
           var value = Number(request.parameter.value);
           update(cell, value);
+          break;
         case "getLeaderboard":
           var leaderboard = getLeaderBoard();
-          result.leaderboard = leaderboard;
+          result = leaderboard;
+          break;
+        case "getTeams":
+          var teams = getTeams();
+          result = teams;
         default:
           Logger.log("Got unknown type " + type);
       }
@@ -89,16 +95,58 @@ function update(cell, value){
 function getLeaderBoard(){
   var sheet = SpreadsheetApp.openById(SHEET_ID);
   var leaderboardSheet = sheet.getSheetByName("Leaderboard");
-  var computedRange = "A2:C"+(PLAYERS+1);
-  var range = leaderboardSheet.getRange(computedRange)
-  var leaderBoard = range.getValues();
-  Logger.log(leaderBoard);
-  var leaderBoardFlat = leaderBoard.map(function(tuple, index){
+  var individualsComputedRange = "A2:C"+(PLAYERS+1);
+  var teamsComputedRange = "E2:G"+(TEAMS+1);
+  
+  var individualRange = leaderboardSheet.getRange(individualsComputedRange);
+  var individualRanks = individualRange.getValues();
+  
+  var teamRange = leaderboardSheet.getRange(teamsComputedRange);
+  var teamRanks = teamRange.getValues();
+  
+  var individuals = individualRanks.map(function(tuple, index){
     var score = tuple[2];
     if(score === "#N/A") {
       score = 0.00;
     }
     return {"rank": tuple[0], "name": tuple[1], "score": Number(score.toFixed(2))}
   })
-  return leaderBoardFlat;
+  
+  var teams = teamRanks.map(function(tuple, index){
+    var score = tuple[2];
+    var team = tuple[1];
+    if(score === "#N/A") {
+      score = 0.00;
+    }
+    if(team === "#N/A") {
+      team = 0;
+    }
+    return {"rank": tuple[0], "name": team.toString(), "score": Number(score.toFixed(2))}
+  })
+  
+  return {"individuals": individuals, "teams": teams};
+}
+
+function getTeams() {
+  // Open Google Sheet using ID
+  var sheet = SpreadsheetApp.openById(SHEET_ID);
+  var range = sheet.getRange("A4:B"+(PLAYERS+3));
+  Logger.log(range.getValues());
+  var teamMap = {};
+  var teamRange = range.getValues();
+  teamRange.forEach(function(tuple, index)
+  {
+    var teamNumber = tuple[0].toString();
+    var playerName = tuple[1];
+    if(teamMap[teamNumber]){
+      teamMap[teamNumber].push(playerName)
+    } else {
+      teamMap[teamNumber] = [playerName];
+    }
+  });
+  var teams = [];
+  Object.keys(teamMap).forEach(function(teamNumber){
+    teams.push({"teamName": teamNumber, "members": teamMap[teamNumber]});
+  })
+  return teams;
 }

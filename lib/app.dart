@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'styles.dart';
+import 'tabs/teams/teams_tab.dart';
 import 'tabs/workout_entry/workout_entry_tab.dart';
 import 'tabs/leaderboard/leader_board_tab.dart';
 
@@ -25,6 +26,10 @@ class Trackr extends StatelessWidget {
               title: Text('Workout'),
             ),
             BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person),
+              title: Text('Teams'),
+            ),
+            BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.flag),
               title: Text('Leaderboard'),
             ),
@@ -39,6 +44,12 @@ class Trackr extends StatelessWidget {
                 );
               });
             case 1:
+              return CupertinoTabView(builder: (context) {
+                return CupertinoPageScaffold(
+                  child: TeamsTab(),
+                );
+              });
+            case 2:
               return CupertinoTabView(builder: (context) {
                 return CupertinoPageScaffold(
                   child: LeadboardTab(),

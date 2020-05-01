@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
+import '../../styles.dart';
 import 'individual_stats.dart';
 
 class Teams extends StatelessWidget {
@@ -45,20 +46,27 @@ class Teams extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            print(team);
-                            Navigator.push(
-                              context, CupertinoPageRoute(
-                                  builder: (context) => IndividualStats(
-                                    formController: new FormController(),
-                                  )
-                                )
-                              );
-                          },
-                          child: Text(team.members[0])
-                        )
-                      ),
+                        child: Column(
+                          children: new List.generate(team.members.length,
+                              (index) => Padding(
+                                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                                            child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context, CupertinoPageRoute(
+                                                            builder: (context) => IndividualStats(
+                                                              formController: new FormController(),
+                                                              playerName: team.members[index],
+                                                            )
+                                                          )
+                                                        );
+                                                    },
+                                                    child: Text(team.members[index], style: Styles.playerNameLink)
+                                                  )
+                                          )
+                              ),
+                          ),
+                      )
                     ]
                   ));
                 }

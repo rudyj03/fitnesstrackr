@@ -31,6 +31,9 @@ abstract class Styles {
     color: CupertinoColors.inactiveGray,
   );
 
+  static const TextStyle playerNameLink = TextStyle(
+    color: CupertinoColors.link
+  );
 
   static const Color fieldDivider = Color(0xFFCFECD1);
   static const Color inputBackground = Color(0xFFFFFFFF);

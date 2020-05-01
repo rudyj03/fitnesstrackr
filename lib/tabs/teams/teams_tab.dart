@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ffi';
-import 'package:fitnesstrackr/tabs/leaderboard/leader_board.dart';
 import 'package:flutter/services.dart';
 
 import 'package:fitnesstrackr/controller/form_controller.dart';

@@ -1,8 +1,11 @@
+import 'package:fitnesstrackr/controller/form_controller.dart';
 import 'package:fitnesstrackr/model/team.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
+
+import 'individual_stats.dart';
 
 class Teams extends StatelessWidget {
   final Future future;
@@ -42,7 +45,19 @@ class Teams extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text(team.members.join("\n"))
+                        child: GestureDetector(
+                          onTap: () {
+                            print(team);
+                            Navigator.push(
+                              context, CupertinoPageRoute(
+                                  builder: (context) => IndividualStats(
+                                    formController: new FormController(),
+                                  )
+                                )
+                              );
+                          },
+                          child: Text(team.members[0])
+                        )
                       ),
                     ]
                   ));

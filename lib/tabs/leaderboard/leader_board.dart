@@ -1,14 +1,18 @@
 import 'package:fitnesstrackr/model/leadboard_entry.dart';
+import 'package:fitnesstrackr/tabs/teams/individual_stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
+import '../../styles.dart';
+
 class LeaderBoard extends StatelessWidget {
   final Future future;
   final Function jsonConverterFuncion;
+  final String type;
 
 
-  const LeaderBoard({Key key, this.future, this.jsonConverterFuncion})
+  const LeaderBoard({Key key, this.future, this.jsonConverterFuncion, this.type})
       : super(key: key);
 
 
@@ -47,7 +51,23 @@ class LeaderBoard extends StatelessWidget {
                     ),
                   ]
                 ));
+              
               leaderBoard.forEach((leaderBoardEntry) {
+                  Widget nameDisplay = Text(leaderBoardEntry.name);
+                  if(type == "individuals"){
+                    nameDisplay = GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context, CupertinoPageRoute(
+                              builder: (context) => IndividualStats(
+                                playerName: leaderBoardEntry.name,
+                              )
+                            )
+                          );
+                      },
+                      child: Text(leaderBoardEntry.name, style: Styles.playerNameLink)
+                    );
+                  }
                   tableRows.add(TableRow(children: [
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal:50.0, vertical: 5.0),
@@ -55,7 +75,7 @@ class LeaderBoard extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 5.0),
-                        child: Text(leaderBoardEntry.name)
+                        child: nameDisplay
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 5.0),

@@ -41,14 +41,15 @@ class _LeadboardTab extends State<LeadboardTab> {
                 CupertinoSliverRefreshControl(onRefresh: _refresh,),
                 CupertinoSliverNavigationBar(
                   backgroundColor: Styles.scaffoldBackground,
-                  largeTitle: Text("Teams", style: Styles.title, textAlign: TextAlign.center,)
+                  largeTitle: Text("Teams", style: Styles.title, textAlign: TextAlign.center,),
+                  transitionBetweenRoutes: false,
 
                 ),
                 SliverList(
                   delegate: SliverChildListDelegate([
-                    Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground),
                     LeaderBoard(
                       future: _leaderboardFuture, 
+                      type: "teams",
                       jsonConverterFuncion: formController.convertTeamLeaderboardFromJson
                     )
                   ])
@@ -57,13 +58,13 @@ class _LeadboardTab extends State<LeadboardTab> {
                   backgroundColor: Styles.scaffoldBackground,
                   largeTitle: Text("Individuals", style: Styles.title, textAlign: TextAlign.center,),
                   automaticallyImplyTitle: true,
-                  transitionBetweenRoutes: true,
+                  transitionBetweenRoutes: false,
                 ),
                 SliverList(
                   delegate: SliverChildListDelegate([
-                    Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground),
                     LeaderBoard(
                       future: _leaderboardFuture, 
+                      type: "individuals",
                       jsonConverterFuncion: formController.convertIndividualLeaderboardFromJson
                     )
                   ])

@@ -45,7 +45,6 @@ class _TeamsTab extends State<TeamsTab> {
                 ),
                 SliverList(
                   delegate: SliverChildListDelegate([
-                    Divider(height: 50.0,thickness: 0.0, color: Styles.scaffoldBackground),
                     Teams(
                       future: _teamsFuture, 
                       jsonConverterFuncion: formController.convertTeamsFromJson

@@ -41,7 +41,7 @@ class Teams extends StatelessWidget {
               teams.forEach((team) {
                   tableRows.add(TableRow(children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal:50.0, vertical: 20.0),
+                        padding: EdgeInsets.symmetric(horizontal:50.0, vertical: 25.0),
                         child: Text(team.teamName)
                       ),
                       Padding(
@@ -55,7 +55,6 @@ class Teams extends StatelessWidget {
                                                       Navigator.push(
                                                         context, CupertinoPageRoute(
                                                             builder: (context) => IndividualStats(
-                                                              formController: new FormController(),
                                                               playerName: team.members[index],
                                                             )
                                                           )
